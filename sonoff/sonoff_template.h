@@ -108,7 +108,7 @@ const char sensors[GPIO_SENSOR_END][9] PROGMEM = {
   "Counter3",
   "Counter4"
   };
-
+  
 // Programmer selectable GPIO functionality offset by user selectable GPIOs
 enum fpins_t {
   GPIO_RXD = GPIO_SENSOR_END,  // Serial interface
@@ -117,6 +117,8 @@ enum fpins_t {
   GPIO_HLW_CF1,        // HLW8012 CF1 voltage / current (Sonoff Pow)
   GPIO_HLW_CF,         // HLW8012 CF power (Sonoff Pow)
   GPIO_ADC0,           // ADC
+  GPIO_DI,             // my92x1 PWM input
+  GPIO_DCKI,           // my92x1 CLK input
   GPIO_USER,           // User configurable
   GPIO_MAX };
 
@@ -149,6 +151,11 @@ enum module_t {
   SONOFF_4CHPRO,
   HUAFAN_SS,
   SONOFF_BRIDGE,
+  SONOFF_B1,
+  AILIGHT,
+  SONOFF_T11,
+  SONOFF_T12,
+  SONOFF_T13,
   TASMOTA_RLPB,
   MAXMODULE };
 
@@ -170,7 +177,7 @@ const mytmplt modules[MAXMODULE] PROGMEM = {
   { "Sonoff Basic",    // Sonoff Basic (ESP8266)
      GPIO_KEY1,        // GPIO00 Button
      GPIO_USER,        // GPIO01 Serial RXD and Optional sensor
-     0,                // GPIO02
+     0,                // GPIO02 
      GPIO_USER,        // GPIO03 Serial TXD and Optional sensor
      GPIO_USER,        // GPIO04 Optional sensor
      0,                // GPIO05
@@ -419,13 +426,13 @@ const mytmplt modules[MAXMODULE] PROGMEM = {
      GPIO_LED1,        // GPIO01 Green LED
      GPIO_TXD,         // GPIO02 RX - Pin next to TX on the PCB
      GPIO_RXD,         // GPIO03 TX - Pin next to GND on the PCB
-     GPIO_PWM2,        // GPIO04 W2
+     GPIO_PWM2,        // GPIO04 W2 
      GPIO_LED2_INV,    // GPIO05 Red LED
      0, 0, 0, 0, 0, 0, // Flash connection
-     GPIO_PWM3,        // GPIO12 Blue
-     GPIO_PWM4,        // GPIO13 Green
-     GPIO_PWM1,        // GPIO14 W1
-     GPIO_PWM5,        // GPIO15 Red
+     GPIO_PWM3,        // GPIO12 Blue 
+     GPIO_PWM4,        // GPIO13 Green 
+     GPIO_PWM1,        // GPIO14 W1 
+     GPIO_PWM5,        // GPIO15 Red 
      0, 0
   },
   { "Sonoff SC",       // Sonoff SC (ESP8266)
@@ -483,11 +490,86 @@ const mytmplt modules[MAXMODULE] PROGMEM = {
      GPIO_TXD,         // GPIO01 RF bridge control
      GPIO_USER,        // GPIO02 Optional sensor
      GPIO_RXD,         // GPIO03 RF bridge control
+     GPIO_USER,        // GPIO04 Optional sensor
+     GPIO_USER,        // GPIO05 Optional sensor
+     0, 0, 0,          // Flash connection
+     0, 0,
+     0,                // Flash connection
+     0,
+     GPIO_LED1_INV,    // GPIO13 Blue Led (0 = On, 1 = Off)
+     0, 0, 0, 0
+  },
+  { "Sonoff B1",       // Sonoff B1 (ESP8285 - my9231)
+     GPIO_KEY1,        // GPIO00 Pad
+     GPIO_USER,        // GPIO01 Serial RXD and Optional sensor pad
+     GPIO_USER,        // GPIO02 Optional sensor SDA pad
+     GPIO_USER,        // GPIO03 Serial TXD and Optional sensor pad
+     0, 0,
+     0, 0, 0,          // Flash connection
+     0, 0,
+     0,                // Flash connection
+     GPIO_DI,          // GPIO12 my9231 DI
+     0,
+     GPIO_DCKI,        // GPIO14 my9231 DCKI
+     0, 0, 0
+  },
+  { "AiLight",         // Ai-Thinker RGBW led (ESP8266 - my9291)
+     GPIO_KEY1,        // GPIO00 Pad
+     GPIO_USER,        // GPIO01 Serial RXD and Optional sensor pad
+     GPIO_USER,        // GPIO02 Optional sensor SDA pad
+     GPIO_USER,        // GPIO03 Serial TXD and Optional sensor pad
      0, 0,
      0, 0, 0,          // Flash connection
      0, 0,
      0,                // Flash connection
      0,
+     GPIO_DI,          // GPIO13 my9291 DI
+     0,
+     GPIO_DCKI,        // GPIO15 my9291 DCKI
+     0, 0
+  },
+  { "Sonoff T1 1CH",   // Sonoff T1 1CH (ESP8285)
+     0,
+     GPIO_USER,        // GPIO01 Serial RXD and Optional sensor
+     0,
+     GPIO_USER,        // GPIO03 Serial TXD and Optional sensor
+     0,
+     GPIO_REL1,        // GPIO05 Blue Led and Relay 1 (0 = Off, 1 = On)
+     0, 0, 0,          // Flash connection
+     GPIO_KEY1,        // GPIO09 Button 1
+     0,
+     0,                // Flash connection
+     0,
+     GPIO_LED1_INV,    // GPIO13 Blue Led (0 = On, 1 = Off)
+     0, 0, 0, 0
+  },
+  { "Sonoff T1 2CH",   // Sonoff T1 2CH (ESP8285)
+     GPIO_KEY1,        // GPIO00 Button 1
+     GPIO_USER,        // GPIO01 Serial RXD and Optional sensor
+     0,
+     GPIO_USER,        // GPIO03 Serial TXD and Optional sensor
+     GPIO_REL2,        // GPIO04 Blue Led and Relay 2 (0 = Off, 1 = On)
+     0,
+     0, 0, 0,          // Flash connection
+     0,
+     GPIO_KEY2,        // GPIO10 Button 2
+     0,                // Flash connection
+     GPIO_REL1,        // GPIO12 Blue Led and Relay 1 (0 = Off, 1 = On)
+     GPIO_LED1_INV,    // GPIO13 Blue Led (0 = On, 1 = Off)
+     0, 0, 0, 0
+  },
+  { "Sonoff T1 3CH",   // Sonoff T1 3CH (ESP8285)
+     GPIO_KEY1,        // GPIO00 Button 1
+     GPIO_USER,        // GPIO01 Serial RXD and Optional sensor
+     0,
+     GPIO_USER,        // GPIO03 Serial TXD and Optional sensor
+     GPIO_REL3,        // GPIO04 Blue Led and Relay 3 (0 = Off, 1 = On)
+     GPIO_REL2,        // GPIO05 Blue Led and Relay 2 (0 = Off, 1 = On)
+     0, 0, 0,          // Flash connection
+     GPIO_KEY2,        // GPIO09 Button 2
+     GPIO_KEY3,        // GPIO10 Button 3
+     0,                // Flash connection
+     GPIO_REL1,        // GPIO12 Blue Led and Relay 1 (0 = Off, 1 = On)
      GPIO_LED1_INV,    // GPIO13 Blue Led (0 = On, 1 = Off)
      0, 0, 0, 0
   },
@@ -508,3 +590,4 @@ const mytmplt modules[MAXMODULE] PROGMEM = {
      GPIO_ADC0         // ADC0   A0 Analog input
   }
 };
+

@@ -152,7 +152,7 @@
 #define ENERGY_RESOLUTION      3                 // [EnergyRes] Maximum number of decimals (0 - 5) showing energy usage in kWh
 
 // -- Sensor code selection -----------------------
-//#define USE_ADC_VCC           1                   // Display Vcc in Power status. Disable for use as Analog input on selected devices
+#define USE_ADC_VCC           1                   // Display Vcc in Power status. Disable for use as Analog input on selected devices
 
 #define USE_DS18x20                              // Optional using OneWire library for multiple DS18B20 and/or DS18S20 (+2k code)
 
