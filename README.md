@@ -3,39 +3,16 @@ Provide ESP8266 based Sonoff by [iTead Studio](https://www.itead.cc/) and Electr
 
 Current version is **5.6.0** - See [sonoff/_releasenotes.ino](https://github.com/arendst/Sonoff-Tasmota/blob/master/sonoff/_releasenotes.ino) for change information.
 
-### ATTENTION All versions
-
-Only Flash Mode DOUT is supported. Do not use Flash Mode DIO / QIO / QOUT as it might seem to brick your device.
-
-See [Wiki](https://github.com/arendst/Sonoff-Tasmota/wiki/Theo's-Tasmota-Tips) for background information.
-
-### ATTENTION Version 5.x.x specific information
-
-This version uses a new linker script to free flash memory for future code additions. It moves the settings from Spiffs to Eeprom. If you compile your own firmware download the new linker to your IDE or Platformio base folder. See [Wiki > Prerequisite](https://github.com/arendst/Sonoff-Tasmota/wiki/Prerequisite).
-
-Best practice to implement is:
-- Open the webpage to your device
-- Perform option ``Backup Configuration``
-- Upgrade new firmware using ``Firmware upgrade``
-- If configuration conversion fails keep the webpage open and perform ``Restore Configuration``
-
-You should now have a device with 32k more code memory to play with.
-
-### Version Information
-
-- This version provides all (Sonoff) modules in one file and starts up with Sonoff Basic.
-- Once uploaded select module using the configuration webpage or the commands ```Modules``` and ```Module```.
-- After reboot select config menu again or use commands ```GPIOs``` and ```GPIO``` to change GPIO with desired sensor.
-
+## Sonoff-Tasmota
 <img src="https://github.com/arendst/arendst.github.io/blob/master/media/sonoffbasic.jpg" width="250" align="right" />
 
-See [Wiki](https://github.com/arendst/Sonoff-Tasmota/wiki) for more information.<br />
-See [Community](https://groups.google.com/d/forum/sonoffusers) for forum and more user experience.
+Provide ESP8266 based Sonoff by [iTead Studio](https://www.itead.cc/) and ElectroDragon IoT Relay with Serial, Web and MQTT control allowing 'Over the Air' or OTA firmware updates using Arduino IDE.
 
-The following devices are supported:
-- [iTead Sonoff Basic](http://sonoff.itead.cc/en/products/sonoff/sonoff-basic)
+## Supported Devices
+The following devices are supported with Serial, Web and MQTT control:
+- [iTead Sonoff Basic](http://sonoff.itead.cc/en/products/sonoff/sonoff-basic)<img src="https://github.com/arendst/arendst.github.io/blob/master/media/sonoff_th.jpg" width="250" align="right" /> 
 - [iTead Sonoff RF](http://sonoff.itead.cc/en/products/sonoff/sonoff-rf)
-- [iTead Sonoff SV](https://www.itead.cc/sonoff-sv.html)<img src="https://github.com/arendst/arendst.github.io/blob/master/media/sonoff_th.jpg" width="250" align="right" />
+- [iTead Sonoff SV](https://www.itead.cc/sonoff-sv.html)
 - [iTead Sonoff TH10/TH16 with temperature sensor](http://sonoff.itead.cc/en/products/sonoff/sonoff-th)
 - [iTead Sonoff Dual](http://sonoff.itead.cc/en/products/sonoff/sonoff-dual)
 - [iTead Sonoff Pow](http://sonoff.itead.cc/en/products/sonoff/sonoff-pow)
@@ -53,9 +30,23 @@ The following devices are supported:
 - [iTead Motor Clockwise/Anticlockwise](https://www.itead.cc/smart-home/motor-reversing-wifi-wireless-switch.html)
 - [Electrodragon IoT Relay Board](http://www.electrodragon.com/product/wifi-iot-relay-board-based-esp8266/)
 
-Planned support:
-- [iTead Sonoff T1](http://sonoff.itead.cc/en/products/residential/sonoff-t1)
-- [iTead Sonoff B1](http://sonoff.itead.cc/en/products/residential/sonoff-b1)
+## Features
+<img src="https://github.com/arendst/arendst.github.io/blob/master/media/sonoff4ch.jpg" width="250" align="right" />
+The following features are available:
 
-<img src="https://github.com/arendst/arendst.github.io/blob/master/media/sonofftoucheu.jpg" height="280" align="left" /> 
-<img src="https://github.com/arendst/arendst.github.io/blob/master/media/sonoff4ch.jpg" height="250" align="right" /> 
+- Multiple devices can be addressed by MQTT `GroupTopic`
+- Firmware upload by OTA or via web page upload
+- Expanded Status messages
+- UDP syslog messages can be filtered on program name starting with `ESP-`
+- The button can send a different MQTT message defined with `ButtonTopic`
+- Initial Wifi setup by user_config.h, Serial, Smartconfig, Wifi manager or WPS config
+- A web server provides control of Sonoff and contains a firmware upload facility
+- Support for DHTxx, AM2301 or DS18B20 temperature sensors as used in Sonoff TH10/TH16
+- Support for I2C sensors BH1750, BME280, BMP280, HTU21, SI70xx and SHT1x
+- Telemetry data can be send using optional different prefix from status messages
+- Native Domoticz MQTT support
+- Easy integration in home automation solutions like openHAB, HomeAssistant, ...
+- Wemo and Hue emulation for Amazon Echo (Alexa) support
+
+## Community
+See [Community](https://groups.google.com/d/forum/sonoffusers) for forum and additional user experience
