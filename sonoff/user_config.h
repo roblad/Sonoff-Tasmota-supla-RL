@@ -39,10 +39,10 @@
 #define WIFI_SUBNETMASK        "255.255.255.0"   // [IpAddress3] If not using DHCP set Network mask
 #define WIFI_DNS               "192.168.100.100"    // [IpAddress4] If not using DHCP set DNS IP address (might be equal to WIFI_GATEWAY)
 
-#define STA_SSID1              "robert_private"      // [Ssid1] Wifi SSID
-#define STA_PASS1              "spierdalac2010"  // [Password1] Wifi password
-#define STA_SSID2              "robert_private2"      // [Ssid2] Optional alternate AP Wifi SSID
-#define STA_PASS2              "spierdalac2010"  // [Password2] Optional alternate AP Wifi password
+#define STA_SSID1              "xxxxx_xxxxx"      // [Ssid1] Wifi SSID
+#define STA_PASS1              "xxxxxxxxx"  // [Password1] Wifi password
+#define STA_SSID2              "xxxxxxxxxxx"      // [Ssid2] Optional alternate AP Wifi SSID
+#define STA_PASS2              "xxxxxxxxxxxx"  // [Password2] Optional alternate AP Wifi password
 #define WIFI_CONFIG_TOOL       WIFI_WPSCONFIG    // [WifiConfig] Default tool if wifi fails to connect
                                                  //   (WIFI_RESTART, WIFI_SMARTCONFIG, WIFI_MANAGER, WIFI_WPSCONFIG, WIFI_RETRY)
 
@@ -70,8 +70,8 @@
 #else
   #define MQTT_HOST            "192.168.100.113"          // [MqttHost]
   #define MQTT_PORT            1883              // [MqttPort] MQTT port (10123 on CloudMQTT)
-  #define MQTT_USER            "client"       // [MqttUser] Optional user
-  #define MQTT_PASS            "Warszawa123!"       // [MqttPassword] Optional password
+  #define MQTT_USER            "xxxxxx"       // [MqttUser] Optional user
+  #define MQTT_PASS            "xxxxxxx"       // [MqttPassword] Optional password
 #endif
 
 #define MQTT_BUTTON_RETAIN     0                 // [ButtonRetain] Button may send retain flag (0 = off, 1 = on)
