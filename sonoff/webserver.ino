@@ -505,8 +505,8 @@ if (pin[GPIO_ADC0] < 99) {
   dtostrf((double)(ESP.getVcc()+130)/1000, 1, 3, stemp);
   snprintf_P(svalue, sizeof(svalue), PSTR("<tr><th>VCC:</th><td>%s V</td></tr>"),stemp);
   tpage += svalue;
-  snprintf_P(svalue, sizeof(svalue), PSTR("<tr><th>AnalogInput0</th><td>%d</td></tr>"), (getAdc0()/2));
-  tpage += svalue;
+  //snprintf_P(svalue, sizeof(svalue), PSTR("<tr><th>AnalogInput0</th><td>%d</td></tr>"), (getAdc0()/2));
+  //tpage += svalue;
 }
 #endif
   if (hlw_flg) {
